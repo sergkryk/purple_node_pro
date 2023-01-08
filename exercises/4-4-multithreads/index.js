@@ -1,5 +1,5 @@
 import perf_hooks from 'perf_hooks';
-import OS from 'os';
+import getFactorial from './getFactorial.js';
 
 const performanceObserver = new perf_hooks.PerformanceObserver((items, observer) => {
   console.log(items.getEntries());
@@ -9,17 +9,25 @@ performanceObserver.observe({entryTypes: ['function']});
 
 const list = [];
 
-for (let i = 0; i < 300000; i++) {
+for (let i = 0; i < 3000000; i++) {
   const random = Math.floor(Math.random()*100);
   list.push(random);
 };
 
-function getNumbersDevidedByTree() {
-  return list.filter((item) => {
-    return item%3 === 0;
-  });
+function calcFactorialOfArr(arr) {
+  return arr.map(el => getFactorial(el));
 }
 
-getNumbersDevidedByTree = perf_hooks.performance.timerify(getNumbersDevidedByTree);
+function main() {
+  const arr = [
+    calcFactorialOfArr(list),
+    calcFactorialOfArr(list),
+    calcFactorialOfArr(list),
+    calcFactorialOfArr(list),
+  ]
+  return arr;
+}
 
-getNumbersDevidedByTree()
+main = perf_hooks.performance.timerify(main);
+
+main()
