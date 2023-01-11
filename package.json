@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/sergkryk/purple_node_pro/issues"
   },
-  "homepage": "https://github.com/sergkryk/purple_node_pro#readme"
+  "homepage": "https://github.com/sergkryk/purple_node_pro#readme",
+  "dependencies": {
+    "node-notifier": "^10.0.1"
+  }
 }
