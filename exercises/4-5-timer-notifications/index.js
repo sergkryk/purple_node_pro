@@ -1,6 +1,8 @@
 import notifier from 'node-notifier';
 const [, , arg1 = "0h", arg2 = "0m", arg3 = "0s"] = process.argv;
 
+const MAX_TIMEOUT_INTERVAL = 86400000;
+
 
 const hoursEx = new RegExp(/\d{1,}[Hh]$/);
 const minutesEx = new RegExp(/\d{1,}[Mm]$/);
@@ -61,7 +63,7 @@ const timeout = argsList.reduce(reducer, 0);
 
 if (timeout <= 0) {
   console.log("I cannot set timeout. The interval is equal 0");
-} else if (timeout >= 86400000) {
+} else if (timeout >= MAX_TIMEOUT_INTERVAL) {
   console.log("I cannot set timeout. The interval must not be more than 24 hours");
 } 
 else {
