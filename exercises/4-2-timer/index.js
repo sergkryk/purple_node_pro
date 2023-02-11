@@ -4,6 +4,8 @@ const hoursEx = new RegExp(/\d{1,}[Hh]$/);
 const minutesEx = new RegExp(/\d{1,}[Mm]$/);
 const secondsEx = new RegExp(/\d{1,}[Ss]$/);
 
+const MAX_TIMER_INTERVAL = 86400000;
+
 const converter = {
   hours: function (h) {
     return parseInt(h) * 60 * 60 * 1000;
@@ -59,7 +61,7 @@ const timeout = argsList.reduce(reducer, 0);
 
 if (timeout <= 0) {
   console.log("I cannot set timeout. The interval is equal 0");
-} else if (timeout >= 86400000) {
+} else if (timeout >= MAX_TIMER_INTERVAL) {
   console.log("I cannot set timeout. The interval must not be more than 24 hours");
 } 
 else {
