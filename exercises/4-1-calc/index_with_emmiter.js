@@ -1,39 +1,26 @@
-import EventEmmiter from 'events';
+import EventEmmiter from "events";
+import path from "path";
+
+import mloader from "./utils/module-loader.js";
+
+const MODULES_PATH = path.resolve("./operations");
+
+const [, , x, y, func] = process.argv;
+const first = Number(x);
+const second = Number(y);
 
 const myEmmiter = new EventEmmiter();
-const [,,x, y,cb] = process.argv;
-const operations = ['add', 'substract', 'multiply', 'divide'];
-const first = +x;
-const second = +y;
 
-myEmmiter.on('add', () => {
-  console.log(first+second);
-})
-myEmmiter.on('substract', () => {
-  console.log(first-second);
-})
-myEmmiter.on('multiply', () => {
-  console.log(first*second);
-})
-myEmmiter.on('divide', () => {
-  console.log(first/second);
-})
-myEmmiter.on('typeMismatch', () => {
-  console.log('I can operate only with numbers');
-})
-myEmmiter.on('wrongOperation', () => {
-  console.log('Please specify proper key word.');
-})
 
 try {
+  const calcFunction = await mloader(MODULES_PATH, func)
   if (isNaN(first) || isNaN(second)) {
-    throw new Error('typeMismatch')
-  };
-  if (!operations.includes(cb)) {
-    throw new Error('wrongOperation')
+    throw new Error('I can calc only numbers')
   }
-  myEmmiter.emit(cb);
+  myEmmiter.on(func, () => {
+    console.log(calcFunction(first,second))
+  })
+  myEmmiter.emit(func);
 } catch (error) {
-  myEmmiter.emit(error.message)
+  console.log(error.message);
 }
-

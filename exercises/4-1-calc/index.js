@@ -1,23 +1,19 @@
-async function main() {
-  const MODULES_PATH = './operations/'
-  const [,,x,y,operation] = process.argv;
-  
-  async function loadModule(moduleName) {
-    try {
-      const { default: defaultModuleFun } = await import(`${MODULES_PATH}${moduleName}.js`)
-      return defaultModuleFun;
-    }
-    catch(err) {
-      return 'No such operation! Please specify the propper key word. E.g. "add", "substract", "multiply" or "divide"'
-    }
-  }
+import path from "path";
 
-  const cb = await loadModule(operation);
-  if (typeof(cb) !== 'function') {
-    console.log(cb);
-  } else {
-    console.log(cb(+x, +y));
-  }
-};
+import mloader from "./utils/module-loader.js";
 
-main();
+const MODULES_PATH = path.resolve("./operations");
+
+const [, , x, y, func] = process.argv;
+const first = Number(x);
+const second = Number(y);
+
+try {
+  const calcFunction = await mloader(MODULES_PATH, func)
+  if (isNaN(first) || isNaN(second)) {
+    throw new Error('I can calc only numbers')
+  }
+  console.log(calcFunction(first, second));
+} catch (error) {
+  console.log(error.message);
+}
