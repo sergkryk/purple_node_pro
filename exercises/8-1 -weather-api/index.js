@@ -1,4 +1,10 @@
 import express from "express";
+import dotenv from "dotenv";
+
+// загружаю переменные из файла .env
+dotenv.config();
+
+console.log(process.env);
 
 import weatherRouter from "./routes/weather.js";
 

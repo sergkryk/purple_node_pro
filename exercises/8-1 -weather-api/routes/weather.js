@@ -1,4 +1,4 @@
 export default async function router(req, res, next) {
-  console.log(req);
-  res.json({message: "Hello"});
+  const city = req.query.city || 'Not specified';
+  res.json({message: city});
 }
