@@ -1,4 +1,6 @@
-const express = require("express");
+import express from "express";
+
+import weatherRouter from "./routes/weather.js";
 
 // переменные для порта и адреса для expressjs
 const PORT = 3000;
@@ -10,7 +12,7 @@ const app = express();
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // Описываю маршруты >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-app.use("/", mainRouter);
+app.use("/weather", weatherRouter);
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 // запуск http сервер >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
