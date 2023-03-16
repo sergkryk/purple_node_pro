@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 // загружаю переменные из файла .env
 dotenv.config();
 
-console.log(process.env);
-
 import weatherRouter from "./routes/weather.js";
 
 // переменные для порта и адреса для expressjs
