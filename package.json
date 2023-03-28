@@ -1,11 +1,11 @@
 {
-  "type": "module",
+  "type": "commonjs",
   "name": "purple_node_pro",
   "version": "1.0.0",
   "description": "",
-  "main": "./exercises/8-1 -weather-api/index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node ./dist/main.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
