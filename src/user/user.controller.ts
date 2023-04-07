@@ -1,11 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import RoutesController from "../common/controllers/routes.controller.js";
 import HTTPError from "../errors/http-error.js";
-import LoggerService from "../log/logger.service.js";
+import { injectable, inject } from "inversify";
+import { TYPES } from "../types.js";
+import ILogger from "../log/logger.interface.js";
 
+
+@injectable()
 export default class UserController extends RoutesController {
-  constructor(logger: LoggerService) {
-    super(logger);
+  constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
+    super(loggerService);
     this.bindRoutes([
       {
         path: '/login',

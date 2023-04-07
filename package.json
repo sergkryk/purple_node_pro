@@ -1,5 +1,5 @@
 {
-  "type": "module",
+  "type": "commonjs",
   "name": "purple_node_pro",
   "version": "1.0.0",
   "description": "",
@@ -22,6 +22,8 @@
     "axios": "^1.3.4",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "inversify": "^6.0.1",
+    "reflect-metadata": "^0.1.13",
     "tslog": "^4.8.2",
     "typescript": "^5.0.2"
   },

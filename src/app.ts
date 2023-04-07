@@ -1,31 +1,29 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 import { Server } from "http";
-import ExeptionFilter from "./errors/exeption.filter.js";
-import LoggerService from "./log/logger.service.js";
 import UserController from "./user/user.controller.js";
+import { injectable, inject } from "inversify";
+import ILogger from "./log/logger.interface.js";
+import { TYPES } from "./types.js";
+import IExeptionFilter from "./errors/exeption.filter.interface.js";
 
+const PORT: number = 3000;
+const networkInterface: string = "127.0.0.1";
+
+@injectable()
 export default class App {
   app: Express;
   server: Server;
   port: number;
   networkInterface: string;
-  logger: LoggerService;
-  userController: UserController;
-  exeptionFilter: ExeptionFilter;
 
   constructor(
-    port: number,
-    networkInterface: string,
-    logger: LoggerService,
-    userController: UserController,
-    exeptionFilter: ExeptionFilter
+    @inject(TYPES.ILogger) private logger: ILogger,
+    @inject(TYPES.UserController) private userController: UserController,
+    @inject(TYPES.IExeptionFilter) private exeptionFilter: IExeptionFilter,
   ) {
     this.app = express();
-    this.port = port;
+    this.port = PORT;
     this.networkInterface = networkInterface;
-    this.logger = logger;
-    this.userController = userController;
-    this.exeptionFilter = exeptionFilter;
   }
 
   private useRoutes() {
