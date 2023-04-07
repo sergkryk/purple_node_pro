@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import RoutesController from '../common/controllers/routes.controller.js';
-import HTTPError from '../errors/http-error.js';
+import RoutesController from '../common/controllers/routes.controller';
+import HTTPError from '../errors/http-error';
 import { injectable, inject } from 'inversify';
-import { TYPES } from '../types.js';
-import ILogger from '../log/logger.interface.js';
-import IUserController from './user.controller.interface.js';
+import { TYPES } from '../types';
+import ILogger from '../log/logger.interface';
+import IUserController from './user.controller.interface';
 
 @injectable()
 export default class UserController extends RoutesController implements IUserController {

@@ -1,6 +1,6 @@
 import { Response, Router } from 'express';
-import IRoute from '../interfaces/route.interface.js';
-import ILogger from '../../log/logger.interface.js';
+import IRoute from '../interfaces/route.interface';
+import ILogger from '../../log/logger.interface';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 

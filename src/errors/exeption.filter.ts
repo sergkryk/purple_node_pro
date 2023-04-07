@@ -1,9 +1,9 @@
 import { Response, Request, NextFunction } from 'express';
-import LoggerService from '../log/logger.service.js';
-import IExeptionFilter from './exeption.filter.interface.js';
-import HTTPError from './http-error.js';
+import LoggerService from '../log/logger.service';
+import IExeptionFilter from './exeption.filter.interface';
+import HTTPError from './http-error';
 import { injectable, inject } from 'inversify';
-import { TYPES } from '../types.js';
+import { TYPES } from '../types';
 
 @injectable()
 export default class ExeptionFilter implements IExeptionFilter {

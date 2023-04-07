@@ -1,10 +1,10 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import { Server } from 'http';
-import UserController from './user/user.controller.js';
+import UserController from './user/user.controller';
 import { injectable, inject } from 'inversify';
-import ILogger from './log/logger.interface.js';
-import { TYPES } from './types.js';
-import IExeptionFilter from './errors/exeption.filter.interface.js';
+import ILogger from './log/logger.interface';
+import { TYPES } from './types';
+import IExeptionFilter from './errors/exeption.filter.interface';
 
 const PORT = 3000;
 const networkInterface = '127.0.0.1';

@@ -1,12 +1,12 @@
 import { Container, ContainerModule, interfaces } from 'inversify';
-import App from './app.js';
-import ExeptionFilter from './errors/exeption.filter.js';
-import LoggerService from './log/logger.service.js';
-import UserController from './user/user.controller.js';
-import { TYPES } from './types.js';
-import IExeptionFilter from './errors/exeption.filter.interface.js';
-import ILogger from './log/logger.interface.js';
-import IUserController from './user/user.controller.interface.js';
+import App from './app';
+import ExeptionFilter from './errors/exeption.filter';
+import LoggerService from './log/logger.service';
+import UserController from './user/user.controller';
+import { TYPES } from './types';
+import IExeptionFilter from './errors/exeption.filter.interface';
+import ILogger from './log/logger.interface';
+import IUserController from './user/user.controller.interface';
 
 const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<ILogger>(TYPES.ILogger).to(LoggerService);
