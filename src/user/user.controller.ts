@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import RoutesController from "../common/controllers/routes.controller.js";
+import HTTPError from "../errors/http-error.js";
 import LoggerService from "../log/logger.service.js";
 
 export default class UserController extends RoutesController {
@@ -20,11 +21,12 @@ export default class UserController extends RoutesController {
   }
 
   login(req: Request, res: Response, next: NextFunction) {
-    return this.send(res, 'Login', 200)
+    this.send(res, 'Login', 200)
   }
 
   register(req: Request, res: Response, next: NextFunction) {
-    return this.send(res, 'Register', 200)
+    // return this.send(res, 'Register', 200)
+    next(new HTTPError("Тестовая ошибка", 404))
   }
 }
 
