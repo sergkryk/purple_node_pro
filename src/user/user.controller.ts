@@ -5,6 +5,8 @@ import { injectable, inject } from 'inversify';
 import { TYPES } from '../types';
 import ILogger from '../log/logger.interface';
 import IUserController from './user.controller.interface';
+import { UserLoginDto } from './dto/login.dto';
+import { UserRegisterDto } from './dto/register.dto';
 
 @injectable()
 export default class UserController extends RoutesController implements IUserController {
@@ -13,7 +15,7 @@ export default class UserController extends RoutesController implements IUserCon
 		this.bindRoutes([
 			{
 				path: '/login',
-				method: 'get',
+				method: 'post',
 				func: this.login,
 			},
 			{
@@ -24,11 +26,12 @@ export default class UserController extends RoutesController implements IUserCon
 		]);
 	}
 
-	login(req: Request, res: Response, next: NextFunction): void {
+	login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
+		console.log(req.body);
 		this.send(res, 'Login', 200);
 	}
 
-	register(req: Request, res: Response, next: NextFunction): void {
+	register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
 		// return this.send(res, 'Register', 200)
 		next(new HTTPError('Тестовая ошибка', 404));
 	}

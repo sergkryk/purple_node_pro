@@ -5,6 +5,7 @@ import { injectable, inject } from 'inversify';
 import ILogger from './log/logger.interface';
 import { TYPES } from './types';
 import IExeptionFilter from './errors/exeption.filter.interface';
+import { json } from 'body-parser';
 
 const PORT = 3000;
 const networkInterface = '127.0.0.1';
@@ -26,6 +27,10 @@ export default class App {
 		this.networkInterface = networkInterface;
 	}
 
+	private useMiddleware(): void {
+		this.app.use(json());
+	}
+
 	private useRoutes(): void {
 		this.app.use('/users', this.userController.router);
 	}
@@ -35,6 +40,7 @@ export default class App {
 	}
 
 	public async init(): Promise<void> {
+		this.useMiddleware();
 		this.useRoutes();
 		this.useExeptions();
 		this.server = await this.app.listen(this.port, this.networkInterface);
