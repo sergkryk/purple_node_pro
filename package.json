@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "dev": "nodemon",
+    "dev:inspect": "nodemon -e ts,json --exec node --inspect=127.0.0.1:9222 -r ts-node/register ./src/main.ts",
     "start": "node ./dist/main.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
