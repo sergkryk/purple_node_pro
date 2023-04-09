@@ -7,6 +7,7 @@ import ILogger from '../log/logger.interface';
 import IUserController from './user.controller.interface';
 import { UserLoginDto } from './dto/login.dto';
 import { UserRegisterDto } from './dto/register.dto';
+import { User } from './user.entity';
 
 @injectable()
 export default class UserController extends RoutesController implements IUserController {
@@ -20,7 +21,7 @@ export default class UserController extends RoutesController implements IUserCon
 			},
 			{
 				path: '/register',
-				method: 'get',
+				method: 'post',
 				func: this.register,
 			},
 		]);
@@ -28,11 +29,16 @@ export default class UserController extends RoutesController implements IUserCon
 
 	login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
 		console.log(req.body);
-		this.send(res, 'Login', 200);
+		this.ok(res, { status: 'success' });
 	}
 
-	register(req: Request<{}, {}, UserRegisterDto>, res: Response, next: NextFunction): void {
-		// return this.send(res, 'Register', 200)
-		next(new HTTPError('Тестовая ошибка', 404));
+	async register(
+		{ body }: Request<{}, {}, UserRegisterDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const user = new User(body.email, body.name);
+		await user.setPassword(body.password);
+		this.ok(res, { name: user.name, email: user.email, password: user.password });
 	}
 }

@@ -15,9 +15,13 @@ export default abstract class RoutesController {
 		return this._router;
 	}
 
-	public send(res: Response, message: string, code: number): Response<any, Record<string, any>> {
+	private send<T>(res: Response, message: T, code: number): Response<any, Record<string, any>> {
 		res.type('application/json');
-		return res.status(code).json({ message: message });
+		return res.status(code).json(message);
+	}
+
+	public ok<T>(res: Response, message: T): Response<any, Record<string, any>> {
+		return this.send(res, message, 200);
 	}
 
 	protected bindRoutes(routes: IRoute[]): void {
