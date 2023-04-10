@@ -6,6 +6,7 @@ import ILogger from './log/logger.interface';
 import { TYPES } from './types';
 import IExeptionFilter from './errors/exeption.filter.interface';
 import { json } from 'body-parser';
+import { IConfigService } from './config/config.service.interface';
 
 const PORT = 3000;
 const networkInterface = '127.0.0.1';
@@ -21,6 +22,7 @@ export default class App {
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.IUserController) private userController: UserController,
 		@inject(TYPES.IExeptionFilter) private exeptionFilter: IExeptionFilter,
+		@inject(TYPES.IConfigService) private configService: IConfigService,
 	) {
 		this.app = express();
 		this.port = PORT;
