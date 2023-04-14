@@ -11,8 +11,10 @@ import { IUserService } from './user/user.service.interface';
 import { UserService } from './user/user.service';
 import { ConfigService } from './config/config.service';
 import { IConfigService } from './config/config.service.interface';
+import DbService from './database/db.service';
 
 const appBindings = new ContainerModule((bind: interfaces.Bind) => {
+	bind<DbService>(TYPES.DbService).to(DbService).inSingletonScope();
 	bind<ILogger>(TYPES.ILogger).to(LoggerService).inSingletonScope();
 	bind<IExeptionFilter>(TYPES.IExeptionFilter).to(ExeptionFilter);
 	bind<IUserController>(TYPES.IUserController).to(UserController);
