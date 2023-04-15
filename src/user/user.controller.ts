@@ -31,9 +31,13 @@ export default class UserController extends RoutesController implements IUserCon
 		]);
 	}
 
-	login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
-		console.log(req.body);
-		this.ok(res, { status: 'success' });
+	async login(
+		req: Request<{}, {}, UserLoginDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const result = await this.userService.validateUser(req.body);
+		this.ok(res, { status: `${result}` });
 	}
 
 	async register(
@@ -43,7 +47,15 @@ export default class UserController extends RoutesController implements IUserCon
 	): Promise<void> {
 		const result = await this.userService.createUser(body);
 		if (result?.name) {
-			this.ok(res, { name: result.name, email: result.email, password: result.password });
+			this.ok(res, {
+				name: result.name,
+				email: result.email,
+				password: result.password,
+				id: result.id,
+			});
 		}
+		this.ok(res, {
+			error: 'User exists',
+		});
 	}
 }

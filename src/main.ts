@@ -12,6 +12,8 @@ import { UserService } from './user/user.service';
 import { ConfigService } from './config/config.service';
 import { IConfigService } from './config/config.service.interface';
 import DbService from './database/db.service';
+import { UserRepository } from './user/user.repository';
+import { IUserRepository } from './user/user.repository.interface';
 
 const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<DbService>(TYPES.DbService).to(DbService).inSingletonScope();
@@ -19,6 +21,7 @@ const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IExeptionFilter>(TYPES.IExeptionFilter).to(ExeptionFilter);
 	bind<IUserController>(TYPES.IUserController).to(UserController);
 	bind<IUserService>(TYPES.IUserService).to(UserService);
+	bind<IUserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
 	bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
 	bind<App>(TYPES.Application).to(App);
 });
